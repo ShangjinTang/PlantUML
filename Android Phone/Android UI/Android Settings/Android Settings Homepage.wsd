@@ -1,0 +1,50 @@
+@startuml
+title Android Settings Homepage
+
+-> SettingsHomepageActivity: AndroidManifest.xml targetActivity
+
+SettingsHomepageActivity ++
+SettingsHomepageActivity -> SettingsHomepageActivity ++: onCreate()
+SettingsHomepageActivity -> TopLevelSettings ++: TopLevelSettings()
+SettingsHomepageActivity --
+SettingsHomepageActivity --
+
+
+TopLevelSettings -> DashboardFragment ++: super.onAttach()
+
+DashboardFragment -> DashboardFragment ++: createPreferenceControllers()
+DashboardFragment --
+
+DashboardFragment -> PreferenceControllerListHelper ++: getPreferenceControllersFromXml()
+  note over PreferenceControllerListHelper: get METADATA_CONTROLLER and METADATA_KEY from xml
+  PreferenceControllerListHelper -> BasePreferenceController ++: createInstance()
+  BasePreferenceController --> PreferenceControllerListHelper --
+PreferenceControllerListHelper --> DashboardFragment --: List<BasePreferenceController>
+
+DashboardFragment -> PreferenceControllerListHelper ++: filterControllers()
+PreferenceControllerListHelper --> DashboardFragment --: List<BasePreferenceController>
+
+DashboardFragment --
+
+
+
+TopLevelSettings -> TopLevelSettings ++: onCreate()
+TopLevelSettings -> DashboardFragment ++: super.onCreate()
+
+note over DashboardFragment: DashboardFragment is PreferenceFragmentCompat\nonCreate() calls onCreatePreference()
+DashboardFragment -> DashboardFragment ++: onCreatePreferences()
+DashboardFragment -> DashboardFragment ++: refreshAllPreferences()
+DashboardFragment -> DashboardFragment ++: displayResourceTiles()
+DashboardFragment -> TopLevelSettings ++: getPreferenceScreenResId()
+TopLevelSettings --> DashboardFragment --: R.xml.top_level_settings
+
+DashboardFragment --
+DashboardFragment -> DashboardFragment ++: refreshDashboardTiles()
+DashboardFragment --
+DashboardFragment --
+DashboardFragment --
+
+DashboardFragment -> DashboardFragment ++: onCreate()
+DashboardFragment -> DashboardFragment ++: updatePreferenceStates()
+
+@enduml
