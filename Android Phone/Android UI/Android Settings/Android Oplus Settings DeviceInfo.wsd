@@ -1,16 +1,16 @@
 @startuml
 title Android Oplus Settings DeviceInfo
 
-DeviceInfoGridFragment ++
-DeviceInfoGridFragment --> MyDeviceInfoFragment ++: super.onAttach()
+DeviceInfoFragment ++
+DeviceInfoFragment --> MyDeviceInfoFragment ++: super.onAttach()
 MyDeviceInfoFragment -> DashboardFragment ++: super.onAttach()
 MyDeviceInfoFragment --
 
 DashboardFragment -> DashboardFragment ++: createPreferenceControllers()
-DashboardFragment -> DeviceInfoGridFragment ++: createPreferenceControllers()
-DeviceInfoGridFragment -> DeviceInfoGridFragment ++: buildPreferenceControllers()
-DeviceInfoGridFragment --> DashboardFragment --: List<AbstractPreferenceController>
-DeviceInfoGridFragment --
+DashboardFragment -> DeviceInfoFragment ++: createPreferenceControllers()
+DeviceInfoFragment -> DeviceInfoFragment ++: buildPreferenceControllers()
+DeviceInfoFragment --> DashboardFragment --: List<AbstractPreferenceController>
+DeviceInfoFragment --
 DashboardFragment --
 
 DashboardFragment -> PreferenceControllerListHelper ++: getPreferenceControllersFromXml()
@@ -23,11 +23,11 @@ DashboardFragment -> PreferenceControllerListHelper ++: filterControllers()
 PreferenceControllerListHelper --> DashboardFragment --: List<AbstractPreferenceController>
 
 DashboardFragment --
-DeviceInfoGridFragment --
+DeviceInfoFragment --
 
 
-DeviceInfoGridFragment -> DeviceInfoGridFragment ++: onCreate()
-DeviceInfoGridFragment -> MyDeviceInfoFragment ++: super.onCreate()
+DeviceInfoFragment -> DeviceInfoFragment ++: onCreate()
+DeviceInfoFragment -> MyDeviceInfoFragment ++: super.onCreate()
 MyDeviceInfoFragment -> DashboardFragment ++: super.onCreate()
 MyDeviceInfoFragment --
 
@@ -35,8 +35,8 @@ note over DashboardFragment: DashboardFragment is PreferenceFragmentCompat\nonCr
 DashboardFragment -> DashboardFragment ++: onCreatePreferences()
 DashboardFragment -> DashboardFragment ++: refreshAllPreferences()
 DashboardFragment -> DashboardFragment ++: displayResourceTiles()
-DashboardFragment -> DeviceInfoGridFragment ++: getPreferenceScreenResId()
-DeviceInfoGridFragment --> DashboardFragment --: R.xml.grid_device_info
+DashboardFragment -> DeviceInfoFragment ++: getPreferenceScreenResId()
+DeviceInfoFragment --> DashboardFragment --: R.xml.device_info
 
 DashboardFragment --
 DashboardFragment -> DashboardFragment ++: refreshDashboardTiles()
