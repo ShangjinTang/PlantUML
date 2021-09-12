@@ -48,6 +48,8 @@ DashboardFragment --
 DashboardFragment -> DashboardFragment ++: onCreate()
 DashboardFragment -> DashboardFragment ++: updatePreferenceStates()
 DashboardFragment -> AbstractPreferenceController ++: updateState()
+AbstractPreferenceController -> AbstractPreferenceController ++: refreshSummary()
+AbstractPreferenceController --
 AbstractPreferenceController --
 DashboardFragment --
 DashboardFragment --
