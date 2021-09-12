@@ -18,12 +18,12 @@ DashboardFragment --
 
 DashboardFragment -> PreferenceControllerListHelper ++: getPreferenceControllersFromXml()
   note over PreferenceControllerListHelper: get METADATA_CONTROLLER and METADATA_KEY from xml
-  PreferenceControllerListHelper -> BasePreferenceController ++: createInstance()
-  BasePreferenceController --> PreferenceControllerListHelper --
-PreferenceControllerListHelper --> DashboardFragment --: List<BasePreferenceController>
+  PreferenceControllerListHelper -> AbstractPreferenceController ++: createInstance()
+  AbstractPreferenceController --> PreferenceControllerListHelper --
+PreferenceControllerListHelper --> DashboardFragment --: List<AbstractPreferenceController>
 
 DashboardFragment -> PreferenceControllerListHelper ++: filterControllers()
-PreferenceControllerListHelper --> DashboardFragment --: List<BasePreferenceController>
+PreferenceControllerListHelper --> DashboardFragment --: List<AbstractPreferenceController>
 
 DashboardFragment --
 
@@ -47,5 +47,10 @@ DashboardFragment --
 
 DashboardFragment -> DashboardFragment ++: onCreate()
 DashboardFragment -> DashboardFragment ++: updatePreferenceStates()
+DashboardFragment -> AbstractPreferenceController ++: updateState()
+AbstractPreferenceController --
+DashboardFragment --
+DashboardFragment --
+
 
 @enduml
